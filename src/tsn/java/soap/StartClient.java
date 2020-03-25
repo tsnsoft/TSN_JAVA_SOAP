@@ -3,6 +3,7 @@ package tsn.java.soap;
 import java.io.FileInputStream;
 import java.util.Properties;
 
+// Используем библиотеки Apache CXF для реализации SOAP-клиента
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 
 public class StartClient {
@@ -24,8 +25,8 @@ public class StartClient {
             AnswerQE answer = soapService.quadraticEquation(-17, 14, 12);
 
             if (answer != null) {
-                System.out.println(answer.getX1());
-                System.out.println(answer.getX2());
+                //System.out.println(answer.getX1());
+                //System.out.println(answer.getX2());
                 System.out.println(answer);
             } else {
                 System.out.println("Нет решения!");

@@ -14,8 +14,8 @@ public class StartServer {
             String serverEndpoint = prop.getProperty("server.endpoint"); // Считываем параметр с данных файла настроек
 
             // АКТИВИРУЕМ WEB-СЕРВИС SOAP
-            CommunicationWithClient communicationWithClient = new CommunicationWithClient();
-            Endpoint.publish(serverEndpoint, communicationWithClient);
+            Endpoint ep = Endpoint.create(new CommunicationWithClient());
+            ep.publish(serverEndpoint);
 
             System.out.println("SOAP-сервер запущен успешно!");
             System.out.println("Адрес сервера: " + serverEndpoint);
@@ -26,6 +26,7 @@ public class StartServer {
             while (-1 != (code = System.in.read())) {
                 ch = (char) code;
                 if (ch == exitCh) {
+                    ep.stop(); // ОСТАНОВКА SOAP-СЕРВЕРА
                     System.out.println("Сервер остановлен.");
                     System.out.println();
                     System.exit(0);
