@@ -62,4 +62,4 @@ This XML file does not appear to have any style information associated with it. 
 </wsdl:definitions>
 ```
 
-[Почитать по теме:](http://javastudy.ru/web-services/soap-java-hello-world-example)
+[Почитать по теме](http://javastudy.ru/web-services/soap-java-hello-world-example)
