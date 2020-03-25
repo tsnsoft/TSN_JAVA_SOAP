@@ -9,17 +9,20 @@ public class StartServer {
     public static void main(String[] args) {
         final char exitCh = 'q';
         try {
-            Properties prop = new Properties();
-            prop.load(new FileInputStream("sca.config"));
-            String serverEndpoint = prop.getProperty("server.endpoint");
+            Properties prop = new Properties(); // Переменная для доступа к файлу с настройкой
+            prop.load(new FileInputStream("sca.config")); // Загружаем данные с файла настроек
+            String serverEndpoint = prop.getProperty("server.endpoint"); // Считываем параметр с данных файла настроек
+
+            // АКТИВИРУЕМ WEB-СЕРВИС SOAP
             CommunicationWithClient communicationWithClient = new CommunicationWithClient();
             Endpoint.publish(serverEndpoint, communicationWithClient);
-            System.out.println("Тестовый SOAP-сервер запущен успешно!");
-            System.out.println("Endpoint: " + serverEndpoint);
+
+            System.out.println("SOAP-сервер запущен успешно!");
+            System.out.println("Адрес сервера: " + serverEndpoint);
             System.out.println("Введите " + exitCh + " и нажмите 'Enter' для остановки сервера ...");
 
-            char ch;
-            int code;
+            // Ждать, пока пользователь не введет символ exitCh, после выход из программы (с авто выключением сервера)
+            char ch;  int code;
             while (-1 != (code = System.in.read())) {
                 ch = (char) code;
                 if (ch == exitCh) {

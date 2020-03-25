@@ -4,11 +4,13 @@ import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.jws.soap.SOAPBinding.Style;
 
+// Указываем специальные аннотации, что класс будет работать в web-технологии SOAP
 @WebService
 @SOAPBinding(style = Style.RPC)
 
 public class CommunicationWithClient implements ICommunicationWithClient {
 
+    // Решение квадратного уровнения
     @Override
     public AnswerQE quadraticEquation(double a, double b, double c) {
         double x1;
@@ -21,9 +23,7 @@ public class CommunicationWithClient implements ICommunicationWithClient {
             if ((Double.isNaN(x1)) || (Double.isInfinite(x1)) || (Double.isNaN(x2)) || (Double.isInfinite(x2))) {
                 throw new Exception();
             }
-            AnswerQE otvet = new AnswerQE();
-            otvet.setX1(x1);
-            otvet.setX2(x2);
+            AnswerQE otvet = new AnswerQE(x1, x2);
             return otvet;
         } catch (Exception e) {
             return null;

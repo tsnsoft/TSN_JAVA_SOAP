@@ -9,21 +9,24 @@ public class StartClient {
 
     public static void main(String[] args) {
         try {
-            Properties prop = new Properties();
-            prop.load(new FileInputStream("sca.config"));
-            String serverEndpoint = prop.getProperty("server.endpoint");
+            Properties prop = new Properties(); // Переменная для доступа к файлу с настройкой
+            prop.load(new FileInputStream("sca.config")); // Загружаем данные с файла настроек
+            String serverEndpoint = prop.getProperty("server.endpoint"); // Считываем параметр с данных файла настроек
+            //server.endpoint=http://localhost:8194/mysoap/test
 
+            // ПОДКЛЮЧАЕМСЯ К SOAP-СЕРВЕРУ
             JaxWsProxyFactoryBean factoryBean = new JaxWsProxyFactoryBean();
             factoryBean.setServiceClass(ICommunicationWithClient.class);
             factoryBean.setAddress(serverEndpoint);
+            ICommunicationWithClient soapService = (ICommunicationWithClient) factoryBean.create();
 
-            ICommunicationWithClient webserviceSEI = (ICommunicationWithClient) factoryBean.create();
+            // Вызов удаленного метода на сервере через web-технологию SOAP
+            AnswerQE answer = soapService.quadraticEquation(-17, 14, 12);
 
-            AnswerQE otvet = webserviceSEI.quadraticEquation(-17, 14, 12);
-            if (otvet != null) {
-                System.out.println(otvet.getX1());
-                System.out.println(otvet.getX2());
-                System.out.println(otvet);
+            if (answer != null) {
+                System.out.println(answer.getX1());
+                System.out.println(answer.getX2());
+                System.out.println(answer);
             } else {
                 System.out.println("Нет решения!");
             }
